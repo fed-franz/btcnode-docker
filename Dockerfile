@@ -4,7 +4,7 @@ FROM debian:latest
 
 # ENV
 ENV localbtcdir=./btc/
-ENV localscriptdir=scripts
+ENV localscriptdir=./scripts/
 ENV btcdir=/root/.bitcoin/
 
 # Copy Bitcoin files
