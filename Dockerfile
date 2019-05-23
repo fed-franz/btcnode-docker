@@ -18,5 +18,5 @@ RUN chmod a+x ./*.sh
 EXPOSE 8333 8332 18333 18332 18443 18444
 
 # Run 'init' script
-ENTRYPOINT ["./btc-start.sh"]
+ENTRYPOINT ["./init.sh"]
 CMD [""]
