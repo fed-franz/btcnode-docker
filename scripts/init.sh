@@ -3,26 +3,6 @@
 # Local Variables
 datadir=$HOME/.bitcoin
 
-# # If not using local binaries, get them from 'frz-dev/btc-x86-bin'
-# if [ -z "$btc_ver" ] btc_ver="latest"; fi
-# if [ ! -f "$btcdir/bitcoind" ]; then
-#    btc_bin="https://raw.githubusercontent.com/frz-dev/btc-x86-bin/master/bin"
-#    latest=$(curl "$btc_bin/$btc_ver")
-#    btc_bin_latest="$btc_bin/$latest"
-#    cd wget "$btc_bin_latest/bitcoind" "$btc_bin_latest/bitcoin-cli"
-# fi
-# # Move binaries
-# mv "$btcdir/bitcoind" "$btcdir/bitcoin-cli" $btc_bin_dir
-
-# ls $datadir
-# bitcoind --daemon
-# sleep 20
-# ls -l $datadir
-
-#ls -l btc scripts
-#echo $btcdir $scriptdir
-# exit
-
 # Check Bitcoin Network Option and setup paths and aliases
 logdir=$datadir
 for i in "$@"
