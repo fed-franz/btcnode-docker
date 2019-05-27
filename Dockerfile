@@ -10,7 +10,6 @@ ENV btcdir=/root/.bitcoin
 ENV sys_bin_dir=/usr/local/bin
 ENV btc_url_base="https://raw.githubusercontent.com/frz-dev/btc-x86-bin/master/bin"
 
-
 # Copy Bitcoin files
 COPY ${btc} ${btc}
 
