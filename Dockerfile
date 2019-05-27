@@ -1,18 +1,34 @@
 # Bitcoin Node
-
-FROM debian:latest
+FROM fedfranz/debian-base:net
 
 # ENV
-ENV localbtcdir=./btc/
-ENV localscriptdir=./scripts/
-ENV btcdir=/root/.bitcoin/
+ARG btc_ver
+
+ENV btc=btc
+ENV scripts=scripts
+ENV btcdir=/root/.bitcoin
+ENV sys_bin_dir=/usr/local/bin
+ENV btc_url_base="https://raw.githubusercontent.com/frz-dev/btc-x86-bin/master/bin"
+
 
 # Copy Bitcoin files
-COPY ${localbtcdir}/bitcoind ${localbtcdir}/bitcoin-cli /usr/local/bin/
-RUN chmod a+x /usr/local/bin/bitcoind /usr/local/bin/bitcoin-cli
-COPY ${localbtcdir}/bitcoin.conf ${btcdir}/bitcoin.conf
-COPY ${localscriptdir} ./
+COPY ${btc} ${btc}
+
+COPY ${scripts}/ ./
 RUN chmod a+x ./*.sh
+
+RUN if [ ! -f "$btc/bitcoind" ] ; then \
+        if [ -z "$btc_ver" ] ; then \
+            btc_ver=$(curl "$btc_url_base/latest"); \
+        fi ; \
+        btc_url="$btc_url_base/$btc_ver"; \
+        wget -P $btc "$btc_url/bitcoind" "$btc_url/bitcoin-cli"; \
+    fi
+
+RUN mv $btc/bitcoind $btc/bitcoin-cli $sys_bin_dir/
+RUN chmod a+x $sys_bin_dir/bitcoind $sys_bin_dir/bitcoin-cli
+RUN mkdir $btcdir
+RUN mv $btc/bitcoin.conf $btcdir/
 
 # Expose Bitcoin ports
 EXPOSE 8333 8332 18333 18332 18443 18444
