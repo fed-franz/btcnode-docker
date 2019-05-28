@@ -14,10 +14,9 @@ BTC_NET=-testnet
 [ "$(docker ps -a | grep $CNT_NAME)" ] && echo "Container name already exists. Exiting" && exit 1
 docker run -d --name $CNT_NAME $BTCNODE
 if [ $? -ne 0 ]; then
-    echo "command1 borked it"
+    echo "Docker run failed. Exiting"; exit 1
 fi
-echo ok
-exit 0
+
 # Wait for Bitcoin Core to start
 sleep 10
 
