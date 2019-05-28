@@ -27,3 +27,16 @@ All the parameters passed at the end of the `docker run` command will be used as
   
 ### Example
 docker run --name btcnode btcnode -testnet -prune=550
+
+## Pre-Synced Node
+To save the image of a btcnode without losing data, you can commit the container
+
+```
+# Stop Bitcoin Core
+docker exec -it btcnode bitcoin-cli -testnet stop
+# Commit state to new image
+docker commit btcnode btcnode-synced
+```
+
+Pre-synced images can be found in Docker `fedfranz/btcnode` repository, tagged like follows:  
+`fedfranz/btcnode:0.18.0-testnet-sync`
