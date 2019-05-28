@@ -12,7 +12,7 @@ BTC_NET=-testnet
 
 # If $CNT_NAME already exists, exits
 [ "$(docker ps -a | grep $CNT_NAME)" ] && echo "Container name already exists. Exiting" && exit 1
-docker run -d --name $CNT_NAME $BTCNODE
+docker run -d --name $CNT_NAME $BTCNODE -testnet -prune=550
 if [ $? -ne 0 ]; then
     echo "Docker run failed. Exiting"; exit 1
 fi
@@ -20,6 +20,7 @@ fi
 # Wait for Bitcoin Core to start
 sleep 10
 
+echo "Monitoring Initial Block Download"
 TOT=$(docker exec -it $CNT_NAME bitcoin-cli $BTC_NET getblockchaininfo | grep headers | tr -dc '0-9')
 CUR=$(docker exec -it $CNT_NAME bitcoin-cli $BTC_NET getblockcount | tr -dc '0-9')
 
