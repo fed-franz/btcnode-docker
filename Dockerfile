@@ -27,7 +27,9 @@ RUN if [ ! -f "$btc/bitcoind" ] ; then \
 RUN mv $btc/bitcoind $btc/bitcoin-cli $sys_bin_dir/
 RUN chmod a+x $sys_bin_dir/bitcoind $sys_bin_dir/bitcoin-cli
 RUN mkdir $btcdir
-RUN mv $btc/bitcoin.conf $btcdir/
+RUN if [ -f "$btc/bitcoin.conf" ] ; then \
+       mv $btc/bitcoin.conf $btcdir; \
+    fi
 
 # Expose Bitcoin ports
 EXPOSE 8333 8332 18333 18332 18443 18444
