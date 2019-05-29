@@ -5,16 +5,13 @@ FROM fedfranz/debian-base:net
 ARG btc_ver
 
 ENV btc=btc
-ENV scripts=scripts
 ENV btcdir=/root/.bitcoin
 ENV sys_bin_dir=/usr/local/bin
 ENV btc_url_base="https://raw.githubusercontent.com/frz-dev/btc-x86-bin/master/bin"
 
 # Copy Bitcoin files
 COPY ${btc} ${btc}
-
-COPY ${scripts}/ ./
-RUN chmod a+x ./*.sh
+RUN chmod a+x ${btc}/*.sh
 
 RUN if [ ! -f "$btc/bitcoind" ] ; then \
         if [ -z "$btc_ver" ] ; then \
@@ -30,6 +27,9 @@ RUN mkdir $btcdir
 RUN if [ -f "$btc/bitcoin.conf" ] ; then \
        mv $btc/bitcoin.conf $btcdir; \
     fi
+
+COPY init.sh ./
+RUN chmod a+x init.sh
 
 # Expose Bitcoin ports
 EXPOSE 8333 8332 18333 18332 18443 18444
