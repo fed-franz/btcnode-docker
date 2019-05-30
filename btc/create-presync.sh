@@ -40,6 +40,7 @@ while [ $(docker inspect -f '{{.State.Running}}' $CNT_NAME) = true ]; do sleep 1
 
 ### Commit and push image ###
 #Set btc-network name
+btcnet="mainnet"
 for i in "$@"
 do
    case "$i" in
@@ -49,7 +50,6 @@ do
    "-regtest")
       btcnet="regtest"
       ;;
-   *) btcnet="mainnet"
    esac
 done
 IMAGE_NAME="$BTCNODE-$btcnet-sync"
