@@ -42,9 +42,9 @@ The `create-presync` script allows to create a presynced images from scratch.
 It starts a new btcnode image, waits for it to synchronize the blockchain and then commits the image adding a -sync suffix to the image name.
 
 Usage:  
-`create-presync.sh BTCNODE_VERSION BTCOPTIONS`  
+`create-presync.sh BTCNODE_REPO BTCOPTIONS`  
 For Example:  
-`create-presync.sh 0.17.0 -testnet -prune=550`  
+`create-presync.sh fedfranz/btcnode:0.17.0 -testnet -prune=550`  
 
 ### Available pre-synced images
 Pre-synced images can be found in Docker `fedfranz/btcnode` repository, tagged like follows:  
