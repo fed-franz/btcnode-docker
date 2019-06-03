@@ -1,5 +1,5 @@
 # Bitcoin Node
-FROM fedfranz/debian-base:net
+FROM fedfranz/ubuntu-base:net
 
 # ENV
 ARG btc_ver
