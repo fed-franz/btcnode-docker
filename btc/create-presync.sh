@@ -2,13 +2,13 @@
 
 ### Set Environment ###
 if [ -z "$1" ]; then
-  echo "Usage: $0 BTC_VERSION BTC_OPTIONS"
+  echo "Usage: $0 BTCNODE_REPO BTC_OPTIONS"
   exit 1
 fi
 
-BTC_VER=$1
+BTCNODE_REPO=$1
 BTC_OPT="${@:2}"
-BTCNODE=fedfranz/btcnode:$BTC_VER
+BTCNODE=$BTCNODE_REPO
 CNT_NAME=btcnode
 
 ### Run container ###
